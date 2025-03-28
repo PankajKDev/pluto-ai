@@ -1,10 +1,10 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { navLinks } from "@/constants";
+import { navLinks, navAuthLinks } from "@/constants";
 import MobileMenu from "../ui/MobileMenu";
 import MobileMenuButton from "../ui/MobileMenuButton";
-import { UserButton } from "@clerk/nextjs";
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -23,15 +23,28 @@ const Navbar = () => {
               </Link>
             </div>
             <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-              {navLinks.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.path}
-                  className="inline-flex items-center px-1 pt-1 text-sm font-medium text-foreground hover:text-primary transition-colors"
-                >
-                  {item.name}
-                </Link>
-              ))}
+              <SignedIn>
+                {navLinks.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.path}
+                    className="inline-flex items-center px-1 pt-1 text-sm font-medium text-foreground hover:text-primary transition-colors"
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </SignedIn>
+              <SignedOut>
+                {navAuthLinks.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.path}
+                    className="inline-flex items-center px-1 pt-1 text-sm font-medium text-foreground hover:text-primary transition-colors"
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </SignedOut>
             </div>
           </div>
 
@@ -48,7 +61,7 @@ const Navbar = () => {
       </div>
 
       {/* Mobile menu responsive */}
-      {isOpen && <MobileMenu navLinks={navLinks} />}
+      {isOpen && <MobileMenu navLinks={navLinks} navAuthLinks={navAuthLinks} />}
     </nav>
   );
 };

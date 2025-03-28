@@ -20,3 +20,14 @@ export const navLinks = [
     name: "Pricing",
   },
 ];
+
+export const navAuthLinks = [
+  {
+    path: "/sign-in",
+    name: "Sign In",
+  },
+  {
+    path: "/sign-up",
+    name: "Sign Up",
+  },
+];

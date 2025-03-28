@@ -2,7 +2,13 @@
 import Link from "next/link";
 import { UserButton, useUser } from "@clerk/nextjs";
 import { SignedIn, SignedOut } from "@clerk/clerk-react";
-const MobileMenu = ({ navLinks }: { navLinks: NavLink[] }) => {
+const MobileMenu = ({
+  navLinks,
+  navAuthLinks,
+}: {
+  navLinks: NavLink[];
+  navAuthLinks: NavLink[];
+}) => {
   const { user } = useUser();
   const userObject = {
     name: user?.fullName,
@@ -37,7 +43,17 @@ const MobileMenu = ({ navLinks }: { navLinks: NavLink[] }) => {
             </div>
           </div>
         </SignedIn>
-        <SignedOut></SignedOut>
+        <SignedOut>
+          {navAuthLinks.map((item) => (
+            <Link
+              key={item.name}
+              href={item.path}
+              className="block pl-3 pr-4 py-2 text-base font-medium text-foreground hover:bg-muted hover:text-primary"
+            >
+              {item.name}
+            </Link>
+          ))}
+        </SignedOut>
       </div>
     </div>
   );
