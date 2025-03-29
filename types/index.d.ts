@@ -17,3 +17,14 @@ interface GridPatternProps {
   squares?: number[][];
   className?: string;
 }
+
+interface ContentItems {
+  isAvailable: boolean;
+  textContent: string;
+}
+interface PricingCardProps {
+  title: string;
+  pricing: string;
+  description: string;
+  content: ContentItems[];
+}

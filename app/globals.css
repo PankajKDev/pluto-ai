@@ -118,9 +118,9 @@
     @apply bg-background text-foreground box-border;
   }
   .root {
-    @apply w-full min-h-screen flex flex-col;
+    @apply w-full h-full flex flex-col;
   }
   .root-container {
-    @apply w-full h-full flex-grow;
+    @apply w-full h-full flex-grow min-h-screen;
   }
 }

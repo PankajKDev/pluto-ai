@@ -64,3 +64,53 @@ export const dataGrid = [
       "Study at your own pace with on-demand courses that fit seamlessly into your busy lifestyle.",
   },
 ];
+
+export const FreeTier = [
+  {
+    isAvailable: true,
+    textContent: "4 Interviews per month",
+  },
+  {
+    isAvailable: true,
+    textContent: "Basic analytics",
+  },
+  {
+    isAvailable: true,
+    textContent: "Limited storage",
+  },
+  {
+    isAvailable: false,
+    textContent: "Advanced reporting",
+  },
+  {
+    isAvailable: false,
+    textContent: "Premium support",
+  },
+];
+
+export const PremiumTier = [
+  {
+    isAvailable: true,
+    textContent: "Unlimited interview sessions",
+  },
+  {
+    isAvailable: true,
+    textContent: "Advanced analytics",
+  },
+  {
+    isAvailable: true,
+    textContent: "Unlimited storage",
+  },
+  {
+    isAvailable: true,
+    textContent: "Priority support",
+  },
+  {
+    isAvailable: true,
+    textContent: "Custom reporting",
+  },
+  {
+    isAvailable: true,
+    textContent: "AI-powered insights",
+  },
+];

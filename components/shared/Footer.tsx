@@ -3,9 +3,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Send } from "lucide-react";
 import { navLinks } from "@/constants";
+import { SignedIn } from "@clerk/nextjs";
+import { MailIcon } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -34,13 +34,8 @@ const Footer = () => {
                 </Link>
               </Button>
               <Button variant="ghost" size="icon" asChild>
-                <Link href="https://twitter.com" target="_blank">
-                  <Image
-                    src="/icons/twitter.svg"
-                    alt="Twitter"
-                    width={16}
-                    height={16}
-                  />
+                <Link href="mailto:pankajk.dev0000@gmail.com" target="_blank">
+                  <MailIcon width={16} height={16} />
                   <span className="sr-only">Twitter</span>
                 </Link>
               </Button>
@@ -57,45 +52,26 @@ const Footer = () => {
               </Button>
             </div>
           </div>
-
-          {/* Quick Links */}
-          <div className="space-y-4">
-            <h3 className="text-sm font-semibold">Quick Links</h3>
-            <ul className="space-y-3 text-sm">
-              {navLinks.map((item) => (
-                <li key={item.name}>
-                  <Link
-                    href={item.path}
-                    className="text-muted-foreground hover:text-foreground transition"
-                  >
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Newsletter */}
-          <div className="space-y-4">
-            <h3 className="text-sm font-semibold">Stay Updated</h3>
-            <p className="text-sm text-muted-foreground">
-              Subscribe to our newsletter for the latest updates.
-            </p>
-            <div className="flex space-x-2">
-              <Input
-                type="email"
-                placeholder="Enter your email"
-                className="max-w-[200px] bg-background"
-              />
-              <Button size="icon">
-                <Send className="h-4 w-4" />
-                <span className="sr-only">Subscribe</span>
-              </Button>
+          <SignedIn>
+            {/* Quick Links */}
+            <div className="space-y-4">
+              <h3 className="text-sm font-semibold">Quick Links</h3>
+              <ul className="space-y-3 text-sm">
+                {navLinks.map((item) => (
+                  <li key={item.name}>
+                    <Link
+                      href={item.path}
+                      className="text-muted-foreground hover:text-foreground transition"
+                    >
+                      {item.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
-          </div>
+          </SignedIn>
         </div>
 
-        {/* Bottom Section */}
         <div className="mt-16 pt-8 border-t border-muted">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-muted-foreground">
