@@ -118,18 +118,9 @@
     @apply bg-background text-foreground box-border;
   }
   .root {
-    @apply w-full h-full;
+    @apply w-full min-h-screen flex flex-col;
   }
   .root-container {
-    @apply w-full flex flex-col  items-center;
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
+    @apply w-full h-full flex-grow;
   }
 }
