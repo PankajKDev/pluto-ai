@@ -36,7 +36,7 @@ const PricingCard: React.FC<PricingCardProps> = ({
       </CardContent>
       <CardFooter></CardFooter>
       <div className="w-full h-16 flex justify-center items-center absolute bottom-0">
-        <Button size="lg" variant="purchased" className="">
+        <Button size="xl" variant="default" className="">
           Active
         </Button>
       </div>

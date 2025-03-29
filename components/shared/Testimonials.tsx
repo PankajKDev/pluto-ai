@@ -8,7 +8,7 @@ const testimonials = [
   {
     name: "Sarah Chen",
     role: "Software Engineer at Google",
-    image: "/avatars/sarah.png",
+    image: "/avatars/sarah.jpg",
     quote:
       "Pluto AI's interview practice helped me land my dream job. The AI feedback was incredibly precise and helped me improve significantly.",
     initials: "SC",
@@ -16,7 +16,7 @@ const testimonials = [
   {
     name: "Michael Rodriguez",
     role: "Full Stack Developer",
-    image: "/avatars/michael.png",
+    image: "/avatars/micahel.jpg",
     quote:
       "The personalized learning paths are amazing. It's like having a mentor who knows exactly what you need to learn next.",
     initials: "MR",
@@ -24,7 +24,7 @@ const testimonials = [
   {
     name: "Emily Thompson",
     role: "Data Scientist",
-    image: "/avatars/emily.png",
+    image: "/avatars/emily.jpg",
     quote:
       "The quality of courses and AI-driven feedback have accelerated my learning journey. Highly recommend for anyone in tech.",
     initials: "ET",
@@ -53,7 +53,11 @@ const Testimonials = () => {
             >
               <div className="flex items-center gap-4 mb-6">
                 <Avatar className="h-12 w-12">
-                  <AvatarImage src={testimonial.image} alt={testimonial.name} />
+                  <AvatarImage
+                    className="object-cover"
+                    src={testimonial.image}
+                    alt={testimonial.name}
+                  />
                   <AvatarFallback>{testimonial.initials}</AvatarFallback>
                 </Avatar>
                 <div className="flex flex-col text-left">
