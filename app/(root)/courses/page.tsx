@@ -1,5 +1,16 @@
+import PageHeading from "@/components/ui/PageHeading";
+
 const page = () => {
-  return <div>page</div>;
+  return (
+    <>
+      <div className="px-4 py-10 md:py-20">
+        <PageHeading
+          headingText="Explore Our Courses"
+          subHeadingText="Unlock skills for every goal and passion."
+        />
+      </div>
+    </>
+  );
 };
 
 export default page;
