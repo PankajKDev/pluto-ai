@@ -21,13 +21,13 @@ const CourseSchema = new Schema(
       type: String,
     },
     techstack: {
-      type: Array,
+      type: [String],
     },
     amount: {
       type: Number,
     },
     questions: {
-      type: Array,
+      type: [String],
     },
   },
   {

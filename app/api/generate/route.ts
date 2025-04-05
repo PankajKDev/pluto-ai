@@ -8,11 +8,11 @@ export async function GET() {
 }
 export async function POST(request: Request) {
   await connectDB();
-  const { userId, username, role, type, level, techstack, amount } =
+  const { userId, username, type, role, level, techstack, amount } =
     await request.json();
 
   try {
-    const { text: interviewQuestions } = await generateText({
+    const { text: questions } = await generateText({
       model: google("gemini-2.0-flash-exp"),
       prompt: `Generate interview questions based on the following parameters:
     Role: ${role}
@@ -25,17 +25,19 @@ Return only the questions in this format:
 Avoid special characters that might interfere with voice assistants.
   `,
     });
-
-    console.log(interviewQuestions);
-    // const newCourse = new Course({
-    //   userId,
-    //   username,
-    //   role,
-    //   type,
-    //   level,
-    //   techstack: techstack.split(""),
-    //   questions:
-    // });
+    const questionsArray = JSON.parse(questions);
+    console.log(questionsArray);
+    const newCourse = new Course({
+      userId,
+      username,
+      role,
+      type,
+      level,
+      techstack: techstack.split(","),
+      questions: questionsArray,
+    });
+    await newCourse.save();
+    return Response.json({ status: 200 });
   } catch (error) {
     console.log("error :", error);
   }
