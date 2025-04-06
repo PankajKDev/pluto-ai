@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { Button } from "./button";
 import {
   Card,
   CardContent,
@@ -12,10 +14,12 @@ function CourseCard({
   role,
   level,
   techstack,
+  url,
 }: {
   role: string;
   level: string;
   techstack: string[];
+  url: string;
 }) {
   return (
     <Card className="w-[80%] md:w-[400px] relative self-center  h-[300px] hover:border-purple-600 border transition-all ease-in-out duration-150">
@@ -31,7 +35,11 @@ function CourseCard({
           ))}
         </div>
       </CardContent>
-      <CardFooter></CardFooter>
+      <CardFooter>
+        <Link href={`/interview/${url}`}>
+          <Button variant="link">View Interview</Button>
+        </Link>
+      </CardFooter>
       <div className="w-full h-16 flex justify-center items-center absolute bottom-0"></div>
     </Card>
   );

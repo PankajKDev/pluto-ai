@@ -31,6 +31,7 @@ function MyCourses() {
           {data.map((item, index) => (
             <CourseCard
               key={index}
+              url={item._id}
               role={item.role}
               techstack={item.techstack}
               level={item.level}
