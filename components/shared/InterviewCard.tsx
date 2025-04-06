@@ -1,4 +1,5 @@
 "use client";
+import { cn } from "@/lib/utils";
 import vapi from "@/lib/vapi";
 import { useUser } from "@clerk/nextjs";
 import { Bot, User } from "lucide-react";
@@ -60,12 +61,18 @@ function InterviewCard({ type }: { type: string }) {
       vapi.off("error", onError);
     };
   }, []);
+
+  useEffect(() => {
+    if (messages.length > 0) {
+      setLastMessage(messages[messages.length - 1].content);
+    }
+  }, [messages]);
   //Starting VAPI call
   const handleCall = async () => {
     setCallStatus(CallStatus.CONNECTING);
     if (type == "generate") {
       await vapi.start(process.env.NEXT_PUBLIC_VAPI_ASSISTANT_ID!, {
-        variableValues: { username: user?.fullName, userId: user?.id },
+        variableValues: { username: user?.fullName, userid: user?.id },
       });
     }
   };
@@ -75,23 +82,49 @@ function InterviewCard({ type }: { type: string }) {
     vapi.stop();
   };
   return (
-    <div className="w-full flex justify-center items-center gap-10 flex-col md:flex-row">
-      <div
-        className={`bg-black/50 w-64 h-64 rounded-2xl flex flex-col justify-center items-center ${
-          isSpeaking ? "border border-purple-600" : "border border-white/25"
-        }`}
-      >
-        <Bot size={64} />
-        <h1 className="text-xl text-white/50">Interviewer</h1>
-      </div>
+    <>
+      <div className="w-full flex justify-center items-center gap-10 flex-col md:flex-row">
+        <div
+          className={`bg-black/50 w-64 h-64 rounded-2xl flex flex-col justify-center items-center ${
+            isSpeaking ? "border border-purple-600" : "border border-white/25"
+          }`}
+        >
+          <Bot size={64} />
+          <h1 className="text-xl text-white/50">Interviewer</h1>
+        </div>
 
-      <div className="bg-black/50 w-64 h-64 rounded-2xl flex flex-col justify-center items-center">
-        <User size={64} />
-        <h1 className="text-xl text-white/50">{user?.fullName}</h1>
+        <div className="bg-black/50 w-64 h-64 rounded-2xl flex flex-col justify-center items-center">
+          <User size={64} />
+          <h1 className="text-xl text-white/50">{user?.fullName}</h1>
+        </div>
+        {callStatus !== "ACTIVE" ? (
+          <button
+            className="relative bg-green-600"
+            onClick={() => handleCall()}
+          >
+            <span
+              className={cn(
+                "absolute animate-ping rounded-full opacity-75",
+                callStatus !== "CONNECTING" && "hidden"
+              )}
+            />
+
+            <span className="relative">
+              {callStatus === "INACTIVE" || callStatus === "FINISHED"
+                ? "Call"
+                : ". . ."}
+            </span>
+          </button>
+        ) : (
+          <button className="btn-disconnect" onClick={() => handleDisconnect()}>
+            End
+          </button>
+        )}
       </div>
-      <button onClick={handleCall}>Call</button>
-      <button onClick={handleDisconnect}>Disconnect</button>
-    </div>
+      <p className="text-white" key={lastMessage}>
+        {lastMessage}
+      </p>
+    </>
   );
 }
 

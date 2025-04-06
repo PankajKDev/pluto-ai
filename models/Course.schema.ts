@@ -4,14 +4,9 @@ import { Schema, models, model } from "mongoose";
 
 const CourseSchema = new Schema(
   {
-    userId: {
+    userid: {
       type: String,
       required: true,
-    },
-    username: {
-      type: String,
-      required: true,
-      lowercase: true,
     },
     role: {
       type: String,
