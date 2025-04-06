@@ -21,7 +21,9 @@ function InterviewCard({ type }: { type: string }) {
   const [callStatus, setCallStatus] = useState<CallStatus>(CallStatus.INACTIVE);
   const [messages, setMessages] = useState<SavedMessage[]>([]);
   const [isSpeaking, setIsSpeaking] = useState(false);
-  const [lastMessage, setLastMessage] = useState<string>("");
+  const [lastMessage, setLastMessage] = useState<string>(
+    "Transcript shows here"
+  );
   const { user } = useUser();
 
   useEffect(() => {
@@ -83,47 +85,56 @@ function InterviewCard({ type }: { type: string }) {
   };
   return (
     <>
-      <div className="w-full flex justify-center items-center gap-10 flex-col md:flex-row">
-        <div
-          className={`bg-black/50 w-64 h-64 rounded-2xl flex flex-col justify-center items-center ${
-            isSpeaking ? "border border-purple-600" : "border border-white/25"
-          }`}
-        >
-          <Bot size={64} />
-          <h1 className="text-xl text-white/50">Interviewer</h1>
-        </div>
-
-        <div className="bg-black/50 w-64 h-64 rounded-2xl flex flex-col justify-center items-center">
-          <User size={64} />
-          <h1 className="text-xl text-white/50">{user?.fullName}</h1>
-        </div>
-        {callStatus !== "ACTIVE" ? (
-          <button
-            className="relative bg-green-600"
-            onClick={() => handleCall()}
+      <div className="w-full flex flex-col">
+        <div className="w-full flex justify-center items-center gap-10 flex-col md:flex-row">
+          <div
+            className={`bg-black/50 w-64 h-64 rounded-2xl flex flex-col justify-center items-center ${
+              isSpeaking ? "border border-purple-600" : "border border-white/25"
+            }`}
           >
-            <span
-              className={cn(
-                "absolute animate-ping rounded-full opacity-75",
-                callStatus !== "CONNECTING" && "hidden"
-              )}
-            />
+            <Bot size={64} />
+            <h1 className="text-xl text-white/50">Interviewer</h1>
+          </div>
 
-            <span className="relative">
-              {callStatus === "INACTIVE" || callStatus === "FINISHED"
-                ? "Call"
-                : ". . ."}
-            </span>
-          </button>
-        ) : (
-          <button className="btn-disconnect" onClick={() => handleDisconnect()}>
-            End
-          </button>
-        )}
+          <div className="bg-black/50 w-64 h-64 rounded-2xl flex flex-col justify-center items-center">
+            <User size={64} />
+            <h1 className="text-xl text-white/50">{user?.fullName}</h1>
+          </div>
+        </div>
+        <div className="py-6 flex w-full justify-center">
+          {callStatus !== "ACTIVE" ? (
+            <button
+              className="bg-green-600 w-32 rounded-lg h-8 cursor-pointer"
+              onClick={() => handleCall()}
+            >
+              <span
+                className={cn(
+                  "absolute animate-ping rounded-full opacity-75",
+                  callStatus !== "CONNECTING" && "hidden"
+                )}
+              />
+
+              <span className="relative">
+                {callStatus === "INACTIVE" || callStatus === "FINISHED"
+                  ? "Call"
+                  : ". . ."}
+              </span>
+            </button>
+          ) : (
+            <button
+              className="bg-red-600 w-32 rounded-lg h-8 cursor-pointer"
+              onClick={() => handleDisconnect()}
+            >
+              End
+            </button>
+          )}
+        </div>
+        <div className="w-full py-5 bg-black/50 rounded-lg">
+          <p className="text-white text-center" key={lastMessage}>
+            {lastMessage}
+          </p>
+        </div>
       </div>
-      <p className="text-white" key={lastMessage}>
-        {lastMessage}
-      </p>
     </>
   );
 }
