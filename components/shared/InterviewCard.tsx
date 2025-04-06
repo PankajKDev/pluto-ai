@@ -65,7 +65,7 @@ function InterviewCard({ type }: { type: string }) {
     setCallStatus(CallStatus.CONNECTING);
     if (type == "generate") {
       await vapi.start(process.env.NEXT_PUBLIC_VAPI_ASSISTANT_ID!, {
-        variableValues: { username: user?.fullName, userid: user?.id },
+        variableValues: { username: user?.fullName, userId: user?.id },
       });
     }
   };
