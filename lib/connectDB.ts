@@ -25,6 +25,7 @@ async function connectDB() {
       });
   }
   cachedInstance.connectionDB = await cachedInstance.promise;
+  console.log("Connected Successfully");
   return cachedInstance.connectionDB;
 }
 
