@@ -33,6 +33,7 @@ Avoid special characters that might interfere with voice assistants.
       level,
       techstack: techstack.split(","),
       questions: questionsArray,
+      attempted: false,
     });
     await newCourse.save();
     return Response.json({ status: 200 });
