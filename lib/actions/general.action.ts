@@ -1,3 +1,4 @@
+"use server";
 import Course from "@/models/Course.schema";
 import connectDB from "../connectDB";
 
