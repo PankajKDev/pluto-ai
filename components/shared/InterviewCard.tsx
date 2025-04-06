@@ -4,6 +4,18 @@ import { useUser } from "@clerk/nextjs";
 import { Bot, User } from "lucide-react";
 import { useEffect, useState } from "react";
 
+enum CallStatus {
+  INACTIVE = "INACTIVE",
+  CONNECTING = "CONNECTING",
+  ACTIVE = "ACTIVE",
+  FINISHED = "FINISHED",
+}
+
+interface SavedMessage {
+  role: "user" | "system" | "assistant";
+  content: string;
+}
+
 function InterviewCard({ type }: { type: string }) {
   const [callStatus, setCallStatus] = useState<CallStatus>(CallStatus.INACTIVE);
   const [messages, setMessages] = useState<SavedMessage[]>([]);
