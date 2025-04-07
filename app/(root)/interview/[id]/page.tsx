@@ -1,5 +1,7 @@
 import InterviewCard from "@/components/shared/InterviewCard";
+
 import { fetchInterviewById } from "@/lib/actions/general.action";
+import { Code } from "lucide-react";
 import { redirect } from "next/navigation";
 
 const page = async ({ params }: RouteParams) => {
@@ -8,13 +10,18 @@ const page = async ({ params }: RouteParams) => {
   if (!interview) redirect("/");
   return (
     <>
-      <h1 className="text-center text-2xl md:text-3xl py-5 uppercase font-medium">
-        {interview?.role} interview
-      </h1>
-      <h1 className="text-center text-lg md:text-3xl py-5 uppercase font-medium">
-        Type: {interview?.type}
-      </h1>
+      <div className="w-full flex justify-between items-center py-4 px-5  ">
+        <h1 className="text-xl font-semibold text-white">
+          {interview?.role} Interview
+        </h1>
+        <div className="flex items-center gap-2 bg-gray-800 px-3 py-1 rounded-full shadow-md">
+          <Code size={16} className="text-gray-300" />
 
+          <span className="text-sm font-medium text-gray-200">
+            {interview.type}
+          </span>
+        </div>
+      </div>
       <InterviewCard
         type="interview"
         interviewId={id}

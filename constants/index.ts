@@ -204,6 +204,7 @@ export const mappings = {
   nuxt: "nuxt",
   strapi: "strapi",
   wordpress: "wordpress",
+  webflow: "webflow",
   contentful: "contentful",
   netlify: "netlify",
   vercel: "vercel",

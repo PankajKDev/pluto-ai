@@ -1,11 +1,15 @@
 "use client";
+import { interviewer } from "@/constants";
 import { cn } from "@/lib/utils";
 import vapi from "@/lib/vapi";
 import { useUser } from "@clerk/nextjs";
+import { Card, CardContent } from "@/components/ui/card";
 import { Bot, User } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-
+import { Button } from "../ui/button";
+import { motion } from "framer-motion";
+import { Badge } from "../ui/badge";
 enum CallStatus {
   INACTIVE = "INACTIVE",
   CONNECTING = "CONNECTING",
@@ -118,7 +122,7 @@ function InterviewCard({
           .map((question) => `- ${question}`)
           .join("\n");
       }
-      await vapi.start("INTERVIEWER", {
+      await vapi.start(interviewer, {
         variableValues: {
           questions: formattedQuestions,
         },
@@ -132,54 +136,67 @@ function InterviewCard({
   };
   return (
     <>
-      <div className="w-full flex gap-10 flex-col">
-        <div className="w-full flex justify-center items-center gap-10 flex-col md:flex-row">
-          <div
-            className={`bg-black/50 w-64 h-64 rounded-2xl flex flex-col justify-center items-center ${
-              isSpeaking ? "border border-purple-600" : "border border-white/25"
-            }`}
+      <div className="flex flex-col items-center gap-6">
+        <div className="flex flex-col md:flex-row items-center gap-8">
+          <Card
+            className={cn(
+              "w-64 h-64 flex flex-col items-center justify-center",
+              isSpeaking ? "border-purple-600 border-2" : "border-muted"
+            )}
           >
-            <Bot size={64} />
-            <h1 className="text-xl text-white/50">Interviewer</h1>
-          </div>
+            <CardContent className="flex flex-col items-center justify-center gap-2">
+              <Bot size={48} className="text-muted-foreground" />
+              <h2 className="text-lg font-semibold text-muted-foreground">
+                Interviewer
+              </h2>
+              <Badge variant="outline" className="text-xs">
+                {callStatus}
+              </Badge>
+            </CardContent>
+          </Card>
 
-          <div className="bg-black/50 w-64 h-64 rounded-2xl flex flex-col justify-center items-center">
-            <User size={64} />
-            <h1 className="text-xl text-white/50">{user?.fullName}</h1>
-          </div>
+          <Card className="w-64 h-64 flex flex-col items-center justify-center">
+            <CardContent className="flex flex-col items-center justify-center gap-2">
+              <User size={48} className="text-muted-foreground" />
+              <h2 className="text-lg font-semibold text-muted-foreground">
+                {user?.fullName || "You"}
+              </h2>
+            </CardContent>
+          </Card>
         </div>
 
-        <div className="w-[80vw] m-auto py-5 bg-black/50 rounded-lg">
-          <p className="text-white text-center" key={lastMessage}>
-            {lastMessage}
-          </p>
-        </div>
-        <div className="py-6 flex w-full justify-center">
+        <Card className="w-full max-w-4xl bg-muted/30">
+          <CardContent className="p-6 text-center text-white text-base min-h-[120px]">
+            {lastMessage || "Transcript will appear here..."}
+          </CardContent>
+        </Card>
+
+        <div className="flex gap-4">
           {callStatus !== "ACTIVE" ? (
-            <button
-              className="bg-green-600 w-32 rounded-lg h-8 cursor-pointer"
-              onClick={() => handleCall()}
+            <Button
+              variant="default"
+              className="bg-green-600 hover:bg-green-700 w-32"
+              onClick={handleCall}
+              disabled={callStatus === "CONNECTING"}
             >
-              <span
-                className={cn(
-                  "absolute animate-ping rounded-full opacity-75",
-                  callStatus !== "CONNECTING" && "hidden"
-                )}
-              />
-
-              <span className="relative">
-                {callStatus === "INACTIVE" || callStatus === "FINISHED"
-                  ? "Call"
-                  : ". . ."}
-              </span>
-            </button>
+              {callStatus === "CONNECTING" ? (
+                <motion.div
+                  className="h-3 w-3 rounded-full bg-white"
+                  animate={{ scale: [1, 1.5, 1] }}
+                  transition={{ repeat: Infinity, duration: 0.8 }}
+                />
+              ) : (
+                "Call"
+              )}
+            </Button>
           ) : (
-            <button
-              className="bg-red-600 w-32 rounded-lg h-8 cursor-pointer"
-              onClick={() => handleDisconnect()}
+            <Button
+              variant="destructive"
+              className="w-32"
+              onClick={handleDisconnect}
             >
               End
-            </button>
+            </Button>
           )}
         </div>
       </div>
