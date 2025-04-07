@@ -33,3 +33,10 @@ interface RouteParams {
   params: Promise<Record<string, string>>;
   searchParans: Promise<Record<string, string>>;
 }
+
+interface FeedbackParams {
+  interviewId: string;
+  userId: string;
+  transcript: { role: string; content: string };
+  feedbackId?: string;
+}
