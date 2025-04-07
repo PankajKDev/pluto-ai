@@ -16,6 +16,7 @@ export interface CourseType {
   role: string;
   type: string;
   level: string;
+  amount: number;
   techstack: string[];
   questions: string[];
   createdAt: string;

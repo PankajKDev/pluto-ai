@@ -8,7 +8,7 @@ export async function GET() {
 }
 export async function POST(request: Request) {
   await connectDB();
-  const { role, type, level, amount, userid, techstack } = await request.json();
+  const { userid, type, role, level, techstack, amount } = await request.json();
 
   try {
     const { text: questions } = await generateText({
@@ -30,8 +30,8 @@ Avoid special characters that might interfere with voice assistants.
       userid,
       role,
       type,
-      level,
       amount,
+      level,
       techstack: techstack.split(","),
       questions: questionsArray,
       attempted: false,
