@@ -14,6 +14,7 @@ export interface CourseType {
   _id: string;
   userid: string;
   role: string;
+  type: string;
   level: string;
   techstack: string[];
   questions: string[];

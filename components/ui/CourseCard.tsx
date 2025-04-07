@@ -37,7 +37,7 @@ function CourseCard({
       </CardContent>
       <CardFooter>
         <Link href={`/interview/${url}`}>
-          <Button variant="link">View Interview</Button>
+          <Button variant="default">View Interview</Button>
         </Link>
       </CardFooter>
       <div className="w-full h-16 flex justify-center items-center absolute bottom-0"></div>

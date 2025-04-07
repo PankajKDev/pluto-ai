@@ -8,6 +8,9 @@ const CourseSchema = new Schema(
     role: {
       type: String,
     },
+    type: {
+      type: String,
+    },
     level: {
       type: String,
     },

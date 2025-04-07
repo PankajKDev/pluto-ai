@@ -5,9 +5,8 @@ import connectDB from "../connectDB";
 export async function fetchInterviews(userId: string) {
   await connectDB();
   try {
-    const fetchedCourses = await Course.find({ userid: userId });
-    const courses = fetchedCourses.map((doc) => doc.toObject());
-    return courses;
+    const fetchedCourses = await Course.find({ userid: userId }).lean();
+    return JSON.parse(JSON.stringify(fetchedCourses));
   } catch (error) {
     console.log("Error :", error);
   }
