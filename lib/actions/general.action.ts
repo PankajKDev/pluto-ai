@@ -4,6 +4,7 @@ import connectDB from "../connectDB";
 import { generateObject } from "ai";
 import { google } from "@ai-sdk/google";
 import { feedbackSchema } from "@/constants";
+import Feedback from "@/models/Feedback.schema";
 
 export async function fetchInterviewById(id: string) {
   await connectDB();
@@ -16,8 +17,8 @@ export async function fetchInterviewById(id: string) {
 }
 
 export async function createFeedback(params: FeedbackParams) {
+  await connectDB();
   const { interviewId, userId, transcript } = params;
-
   try {
     const formattedTranscript = transcript
       .map(
@@ -53,6 +54,21 @@ export async function createFeedback(params: FeedbackParams) {
       system:
         "You are a professional interviewer analyzing a mock interview. Your task is to evaluate the candidate based on structured categories",
     });
+
+    const newFeedback = new Feedback({
+      interviewId,
+      userId,
+      totalScore,
+      categoryScores,
+      strengths,
+      areasForImprovement,
+      finalAssessment,
+    });
+    await newFeedback.save();
+    return {
+      success: true,
+      feedbackId: newFeedback._id,
+    };
   } catch (error) {
     console.error("Error saving feedback :", error);
   }
