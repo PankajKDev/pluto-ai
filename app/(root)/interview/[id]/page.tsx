@@ -1,3 +1,4 @@
+import InterviewCard from "@/components/shared/InterviewCard";
 import { fetchInterviewById } from "@/lib/actions/general.action";
 import { redirect } from "next/navigation";
 
@@ -13,6 +14,12 @@ const page = async ({ params }: RouteParams) => {
       <h1 className="text-center text-lg md:text-3xl py-5 uppercase font-medium">
         Type: {interview?.type}
       </h1>
+
+      <InterviewCard
+        type="interview"
+        interviewId={id}
+        questions={interview?.questions}
+      />
     </>
   );
 };

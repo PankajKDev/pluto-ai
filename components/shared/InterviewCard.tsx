@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 import vapi from "@/lib/vapi";
 import { useUser } from "@clerk/nextjs";
 import { Bot, User } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 enum CallStatus {
@@ -17,7 +18,16 @@ interface SavedMessage {
   content: string;
 }
 
-function InterviewCard({ type }: { type: string }) {
+function InterviewCard({
+  type,
+  interviewId,
+  questions,
+}: {
+  type: string;
+  interviewId?: string;
+  questions?: string[];
+}) {
+  const router = useRouter();
   const [callStatus, setCallStatus] = useState<CallStatus>(CallStatus.INACTIVE);
   const [messages, setMessages] = useState<SavedMessage[]>([]);
   const [isSpeaking, setIsSpeaking] = useState(false);
@@ -64,17 +74,54 @@ function InterviewCard({ type }: { type: string }) {
     };
   }, []);
 
+  //handle feedback
+  const handleGenerateFeedback = async (messages: SavedMessage[]) => {
+    console.log("Generate feedback here");
+    const { success, id } = {
+      success: true,
+      id: "feedback-id",
+    };
+    if (success && id) {
+      router.push(`/interview/${interviewId}/feedback`);
+    } else {
+      {
+        console.log("error saving feedback");
+        router.push("/");
+      }
+    }
+  };
+
   useEffect(() => {
     if (messages.length > 0) {
       setLastMessage(messages[messages.length - 1].content);
     }
-  }, [messages]);
+
+    if (callStatus === CallStatus.FINISHED) {
+      if (type == "generate") {
+        router.push("/");
+      } else {
+        handleGenerateFeedback(messages);
+      }
+    }
+  }, [messages, callStatus, type, router]);
   //Starting VAPI call
   const handleCall = async () => {
     setCallStatus(CallStatus.CONNECTING);
     if (type == "generate") {
       await vapi.start(process.env.NEXT_PUBLIC_VAPI_ASSISTANT_ID!, {
         variableValues: { username: user?.fullName, userid: user?.id },
+      });
+    } else {
+      let formattedQuestions = "";
+      if (questions) {
+        formattedQuestions = questions
+          .map((question) => `- ${question}`)
+          .join("\n");
+      }
+      await vapi.start("INTERVIEWER", {
+        variableValues: {
+          questions: formattedQuestions,
+        },
       });
     }
   };
