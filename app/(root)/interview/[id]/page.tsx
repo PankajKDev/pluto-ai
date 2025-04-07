@@ -1,6 +1,6 @@
 import InterviewCard from "@/components/shared/InterviewCard";
 
-import { fetchInterviewById } from "@/lib/actions/fetch.action";
+import { fetchInterviewById } from "@/lib/actions/general.action";
 import { Code } from "lucide-react";
 import { redirect } from "next/navigation";
 
