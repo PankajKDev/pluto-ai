@@ -85,7 +85,7 @@ function InterviewCard({ type }: { type: string }) {
   };
   return (
     <>
-      <div className="w-full flex flex-col">
+      <div className="w-full flex gap-10 flex-col">
         <div className="w-full flex justify-center items-center gap-10 flex-col md:flex-row">
           <div
             className={`bg-black/50 w-64 h-64 rounded-2xl flex flex-col justify-center items-center ${
@@ -100,6 +100,12 @@ function InterviewCard({ type }: { type: string }) {
             <User size={64} />
             <h1 className="text-xl text-white/50">{user?.fullName}</h1>
           </div>
+        </div>
+
+        <div className="w-[80vw] m-auto py-5 bg-black/50 rounded-lg">
+          <p className="text-white text-center" key={lastMessage}>
+            {lastMessage}
+          </p>
         </div>
         <div className="py-6 flex w-full justify-center">
           {callStatus !== "ACTIVE" ? (
@@ -128,11 +134,6 @@ function InterviewCard({ type }: { type: string }) {
               End
             </button>
           )}
-        </div>
-        <div className="w-full py-5 bg-black/50 rounded-lg">
-          <p className="text-white text-center" key={lastMessage}>
-            {lastMessage}
-          </p>
         </div>
       </div>
     </>

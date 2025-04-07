@@ -8,7 +8,7 @@ export async function GET() {
 }
 export async function POST(request: Request) {
   await connectDB();
-  const { userid, type, role, level, techstack, amount } = await request.json();
+  const { role, type, level, amount, userid, techstack } = await request.json();
 
   try {
     const { text: questions } = await generateText({

@@ -7,21 +7,27 @@ const CourseSchema = new Schema(
     },
     role: {
       type: String,
+      required: true,
     },
     type: {
       type: String,
+      required: true,
     },
     level: {
       type: String,
+      required: true,
     },
     techstack: {
       type: [String],
+      required: true,
     },
     amount: {
       type: Number,
+      required: true,
     },
     questions: {
       type: [String],
+      required: true,
     },
     attempted: {
       type: Boolean,
