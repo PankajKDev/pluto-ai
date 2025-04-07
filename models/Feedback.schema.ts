@@ -8,14 +8,17 @@ const FeedbackSchema = new Schema(
       type: String,
     },
     totalScore: {
-      type: String,
+      type: Number,
     },
-    categoryScore: {
-      type: String,
-    },
-    areasForImprovement: {
-      type: String,
-    },
+    categoryScore: [
+      {
+        name: String,
+        score: Number,
+        comment: String,
+      },
+    ],
+    strengths: [{ type: String }],
+    areasForImprovement: [{ type: String }],
     finalAssesment: {
       type: String,
     },

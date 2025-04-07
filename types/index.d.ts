@@ -40,3 +40,23 @@ interface FeedbackParams {
   transcript: { role: string; content: string };
   feedbackId?: string;
 }
+
+interface Feedback {
+  _id: string;
+  totalScore: number;
+  categoryScores: Array<{
+    name: string;
+    score: number;
+    comment: string;
+  }>;
+  strengths: string[];
+  areasForImprovement: string[];
+  finalAssessment: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+interface GetFeedbackByInterviewIdParams {
+  interviewId: string;
+  userId: string;
+}

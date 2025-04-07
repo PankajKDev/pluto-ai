@@ -1,12 +1,13 @@
 import InterviewCard from "@/components/shared/InterviewCard";
 
-import { fetchInterviewById } from "@/lib/actions/general.action";
+import { fetchInterviewById } from "@/lib/actions/fetch.action";
 import { Code } from "lucide-react";
 import { redirect } from "next/navigation";
 
 const page = async ({ params }: RouteParams) => {
   const { id } = await params;
   const interview = await fetchInterviewById(id);
+
   if (!interview) redirect("/");
   return (
     <>

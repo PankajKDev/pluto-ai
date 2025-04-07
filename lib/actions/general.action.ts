@@ -1,20 +1,10 @@
 "use server";
-import Course from "@/models/Course.schema";
+
 import connectDB from "../connectDB";
 import { generateObject } from "ai";
 import { google } from "@ai-sdk/google";
 import { feedbackSchema } from "@/constants";
 import Feedback from "@/models/Feedback.schema";
-
-export async function fetchInterviewById(id: string) {
-  await connectDB();
-  try {
-    const course = await Course.findById(id).lean();
-    return course ? JSON.parse(JSON.stringify(course)) : null;
-  } catch (error) {
-    console.log("Error :", error);
-  }
-}
 
 export async function createFeedback(params: FeedbackParams) {
   await connectDB();
@@ -71,5 +61,18 @@ export async function createFeedback(params: FeedbackParams) {
     };
   } catch (error) {
     console.error("Error saving feedback :", error);
+    return {
+      success: false,
+    };
+  }
+}
+
+export async function fetchInterviewById(id: string) {
+  await connectDB();
+  try {
+    const feedback = await Feedback.findById(id).lean();
+    return feedback ? JSON.parse(JSON.stringify(feedback)) : null;
+  } catch (error) {
+    console.log("Error :", error);
   }
 }

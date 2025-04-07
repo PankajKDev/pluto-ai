@@ -11,3 +11,26 @@ export async function fetchInterviews(userId: string) {
     console.log("Error :", error);
   }
 }
+
+export async function fetchFeedbackById(
+  params: GetFeedbackByInterviewIdParams
+): Promise<Feedback | null> {
+  await connectDB();
+  const { interviewId, userId } = params;
+  try {
+    const feedback = await Course.findOne({
+      _id: interviewId,
+      userid: userId,
+    }).lean();
+    if (!feedback) return null;
+    const doc = JSON.parse(JSON.stringify(feedback));
+    const { _id, ...rest } = doc;
+    return {
+      id: _id,
+      ...rest,
+    } as Feedback;
+  } catch (error) {
+    console.log("Error :", error);
+    return null;
+  }
+}

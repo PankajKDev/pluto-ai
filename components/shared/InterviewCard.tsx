@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import { motion } from "framer-motion";
 import { Badge } from "../ui/badge";
+import { createFeedback } from "@/lib/actions/general.action";
 enum CallStatus {
   INACTIVE = "INACTIVE",
   CONNECTING = "CONNECTING",
@@ -81,10 +82,11 @@ function InterviewCard({
   //handle feedback
   const handleGenerateFeedback = async (messages: SavedMessage[]) => {
     console.log("Generate feedback here");
-    const { success, id } = {
-      success: true,
-      id: "feedback-id",
-    };
+    const { success, feedbackId: id } = await createFeedback({
+      interviewId: interviewId!,
+      userId: user!.id,
+      transcript: messages,
+    });
     if (success && id) {
       router.push(`/interview/${interviewId}/feedback`);
     } else {
