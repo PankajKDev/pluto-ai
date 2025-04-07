@@ -31,6 +31,7 @@ Avoid special characters that might interfere with voice assistants.
       role,
       type,
       level,
+      amount,
       techstack: techstack.split(","),
       questions: questionsArray,
       attempted: false,
