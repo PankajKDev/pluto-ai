@@ -8,7 +8,10 @@ const page = async ({ params }: RouteParams) => {
   const { id } = await params;
   const interview = await fetchInterviewById(id);
 
-  if (!interview) redirect("/");
+  if (!interview) {
+    console.log(interview);
+    redirect("/");
+  }
   return (
     <>
       <div className="w-full flex justify-between items-center py-4 px-5  ">

@@ -5,6 +5,7 @@ import { generateObject } from "ai";
 import { google } from "@ai-sdk/google";
 import { feedbackSchema } from "@/constants";
 import Feedback from "@/models/Feedback.schema";
+import Course from "@/models/Course.schema";
 
 export async function createFeedback(params: FeedbackParams) {
   await connectDB();
@@ -70,8 +71,8 @@ export async function createFeedback(params: FeedbackParams) {
 export async function fetchInterviewById(id: string) {
   await connectDB();
   try {
-    const feedback = await Feedback.findById(id).lean();
-    return feedback ? JSON.parse(JSON.stringify(feedback)) : null;
+    const course = await Course.findById(id).lean();
+    return course ? JSON.parse(JSON.stringify(course)) : null;
   } catch (error) {
     console.log("Error :", error);
   }
