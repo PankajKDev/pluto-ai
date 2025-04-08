@@ -11,8 +11,8 @@ export const navLinks = [
     name: "Courses",
   },
   {
-    path: "/stats",
-    name: "Stats",
+    path: "/interview",
+    name: "Interview",
   },
   {
     path: "/pricing",

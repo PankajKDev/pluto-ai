@@ -28,11 +28,11 @@ export function HeroSectionOne() {
           }}
           className="relative z-10 mt-8 flex flex-wrap items-center justify-center gap-4"
         >
-          <Link href="/courses">
-            <Button variant="purchased">Check Courses</Button>
+          <Link href="/interview">
+            <Button variant="purchased">Create Interview</Button>
           </Link>
-          <Link href="/pricing">
-            <Button variant="secondary">Check Pricing</Button>
+          <Link href="/courses">
+            <Button variant="secondary">Check your Courses</Button>
           </Link>
         </motion.div>
       </div>

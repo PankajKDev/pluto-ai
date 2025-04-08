@@ -12,7 +12,6 @@ const Footer = () => {
     <footer className="border-t bg-background/95 backdrop-blur mt-10 supports-[backdrop-filter]:bg-background/60">
       <div className="container px-4 md:px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Brand and Description */}
           <div className="space-y-4 md:col-span-2">
             <Link href="/" className="text-2xl font-bold text-primary">
               Pluto AI
@@ -23,7 +22,7 @@ const Footer = () => {
             </p>
             <div className="flex items-center space-x-4">
               <Button variant="ghost" size="icon" asChild>
-                <Link href="https://github.com" target="_blank">
+                <Link href="https://github.com/PankajKDev" target="_blank">
                   <Image
                     src="/icons/github.svg"
                     alt="GitHub"
@@ -40,7 +39,7 @@ const Footer = () => {
                 </Link>
               </Button>
               <Button variant="ghost" size="icon" asChild>
-                <Link href="https://linkedin.com" target="_blank">
+                <Link href="https://linkedin.com/pankajkdev" target="_blank">
                   <Image
                     src="/icons/linkedin.svg"
                     alt="LinkedIn"
