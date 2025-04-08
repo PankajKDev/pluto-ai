@@ -23,9 +23,6 @@ function CourseCard({
 }) {
   return (
     <>
-      <h1 className="mt-5 text-2xl text-foreground/25 text-center ">
-        Your Courses
-      </h1>
       <Card className="w-[80%] md:w-[400px] relative self-center  h-[300px] hover:border-purple-600 border transition-all ease-in-out duration-150">
         <CardHeader>
           <CardTitle className="text-2xl">{role}</CardTitle>

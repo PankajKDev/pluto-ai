@@ -48,7 +48,7 @@ const page = async ({ params }: RouteParams) => {
         </h3>
       </div>
       {feedback?.strengths.length > 0 ? (
-        <div className="w-fit mt-5 max-w-3xl shadow-md gap-5 m-auto bg-black/25 p-5 rounded-md  flex flex-col justify-center ">
+        <div className="w-full mt-5 max-w-3xl shadow-md gap-5 m-auto bg-black/25 p-5 rounded-md  flex flex-col justify-center ">
           <div className="flex items-center gap-5 rounded-full ">
             <BicepsFlexed height={32} width={32} />
             <h1 className="text-xl">Strengths</h1>
@@ -100,8 +100,8 @@ const page = async ({ params }: RouteParams) => {
       )}
 
       <div className="w-full flex gap-5 py-11 justify-center">
-        <Link href="/">
-          <Button variant="default">Dashboard</Button>
+        <Link href="/courses">
+          <Button variant="default">Courses</Button>
         </Link>
         <Link href={`/interview/${id.toString()}`}>
           <Button>Retake Interview</Button>
