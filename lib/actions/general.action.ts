@@ -12,6 +12,7 @@ export async function createFeedback(params: FeedbackParams) {
   await connectDB();
   const { interviewId, transcript } = params;
   const { userId } = await auth();
+  console.log(userId);
   try {
     const formattedTranscript = transcript
       .map(
@@ -50,7 +51,7 @@ export async function createFeedback(params: FeedbackParams) {
 
     const newFeedback = new Feedback({
       interviewId,
-      userId,
+      userid: userId,
       totalScore,
       categoryScores,
       strengths,

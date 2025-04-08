@@ -28,7 +28,7 @@ export async function fetchFeedbackById(
     const doc = JSON.parse(JSON.stringify(feedback));
     const { _id, ...rest } = doc;
     return {
-      id: _id,
+      id: _id.toString(),
       ...rest,
     } as Feedback;
   } catch (error) {
