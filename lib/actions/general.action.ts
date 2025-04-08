@@ -6,10 +6,12 @@ import { google } from "@ai-sdk/google";
 import { feedbackSchema } from "@/constants";
 import Feedback from "@/models/Feedback.schema";
 import Course from "@/models/Course.schema";
+import { auth } from "@clerk/nextjs/server";
 
 export async function createFeedback(params: FeedbackParams) {
   await connectDB();
-  const { interviewId, userId, transcript } = params;
+  const { interviewId, transcript } = params;
+  const { userId } = await auth();
   try {
     const formattedTranscript = transcript
       .map(

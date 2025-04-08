@@ -86,7 +86,6 @@ function InterviewCard({
     console.log("Generate feedback here");
     const { success, feedbackId: id } = await createFeedback({
       interviewId: interviewId!,
-      userId: user?.id,
       transcript: messages,
     });
     if (success && id) {
