@@ -1,6 +1,7 @@
 "use server";
 import Course from "@/models/Course.schema";
 import connectDB from "../connectDB";
+import Feedback from "@/models/Feedback.schema";
 
 export async function fetchInterviews(userId: string) {
   await connectDB();
@@ -18,7 +19,7 @@ export async function fetchFeedbackById(
   await connectDB();
   const { interviewId, userId } = params;
   try {
-    const feedback = await Course.findOne({
+    const feedback = await Feedback.findOne({
       interviewId: interviewId,
       userid: userId,
     })
