@@ -19,9 +19,11 @@ export async function fetchFeedbackById(
   const { interviewId, userId } = params;
   try {
     const feedback = await Course.findOne({
-      _id: interviewId,
+      interviewId: interviewId,
       userid: userId,
-    }).lean();
+    })
+      .limit(1)
+      .lean();
     if (!feedback) return null;
     const doc = JSON.parse(JSON.stringify(feedback));
     const { _id, ...rest } = doc;
