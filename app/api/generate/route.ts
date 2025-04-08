@@ -40,5 +40,6 @@ Avoid special characters that might interfere with voice assistants.
     return Response.json({ status: 200 });
   } catch (error) {
     console.log("error :", error);
+    return null;
   }
 }

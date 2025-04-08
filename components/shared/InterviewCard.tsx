@@ -9,8 +9,9 @@ import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import { motion } from "framer-motion";
 import { Badge } from "../ui/badge";
-import { createFeedback, getUserAuthData } from "@/lib/actions/general.action";
+import { createFeedback } from "@/lib/actions/general.action";
 import { useUser } from "@clerk/nextjs";
+
 enum CallStatus {
   INACTIVE = "INACTIVE",
   CONNECTING = "CONNECTING",
@@ -39,7 +40,7 @@ function InterviewCard({
   const [lastMessage, setLastMessage] = useState<string>(
     "Transcript shows here"
   );
-  const userId = getUserAuthData();
+
   const { user } = useUser();
 
   useEffect(() => {
@@ -85,7 +86,7 @@ function InterviewCard({
     console.log("Generate feedback here");
     const { success, feedbackId: id } = await createFeedback({
       interviewId: interviewId!,
-      userId: userId,
+      userId: user?.id,
       transcript: messages,
     });
     if (success && id) {

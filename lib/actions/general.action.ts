@@ -6,7 +6,6 @@ import { google } from "@ai-sdk/google";
 import { feedbackSchema } from "@/constants";
 import Feedback from "@/models/Feedback.schema";
 import Course from "@/models/Course.schema";
-import { auth } from "@clerk/nextjs/server";
 
 export async function createFeedback(params: FeedbackParams) {
   await connectDB();
@@ -76,15 +75,5 @@ export async function fetchInterviewById(id: string) {
     return course ? JSON.parse(JSON.stringify(course)) : null;
   } catch (error) {
     console.log("Error :", error);
-  }
-}
-
-export async function getUserAuthData(): Promise<string | null> {
-  try {
-    const { userId } = await auth();
-    return userId;
-  } catch (e) {
-    console.log("error fetching userId", e);
-    return null;
   }
 }
