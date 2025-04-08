@@ -11,6 +11,7 @@ import { motion } from "framer-motion";
 import { Badge } from "../ui/badge";
 import { createFeedback } from "@/lib/actions/general.action";
 import { useUser } from "@clerk/nextjs";
+import { toast, Toaster } from "sonner";
 
 enum CallStatus {
   INACTIVE = "INACTIVE",
@@ -83,7 +84,7 @@ function InterviewCard({
 
   //handle feedback
   const handleGenerateFeedback = async (messages: SavedMessage[]) => {
-    console.log("Generate feedback here");
+    toast("Feedback is being generated");
     const { success, feedbackId: id } = await createFeedback({
       interviewId: interviewId!,
       transcript: messages,
@@ -202,6 +203,7 @@ function InterviewCard({
             </Button>
           )}
         </div>
+        <Toaster />
       </div>
     </>
   );

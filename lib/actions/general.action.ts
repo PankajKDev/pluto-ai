@@ -48,12 +48,12 @@ export async function createFeedback(params: FeedbackParams) {
       categoryScores: object.categoryScores,
       strengths: object.strengths,
       areasForImprovement: object.areasForImprovement,
-      finalAssesment: object.finalAssessment,
+      finalAssessment: object.finalAssessment,
     });
     await newFeedback.save();
     return {
       success: true,
-      feedbackId: newFeedback._id,
+      feedbackId: newFeedback._id.toString(),
     };
   } catch (error) {
     console.error("Error saving feedback :", error);

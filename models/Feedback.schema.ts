@@ -12,7 +12,7 @@ const FeedbackSchema = new Schema(
     totalScore: {
       type: Number,
     },
-    categoryScore: [
+    categoryScores: [
       {
         name: String,
         score: Number,
@@ -21,7 +21,7 @@ const FeedbackSchema = new Schema(
     ],
     strengths: [{ type: String }],
     areasForImprovement: [{ type: String }],
-    finalAssesment: {
+    finalAssessment: {
       type: String,
     },
   },
