@@ -9,7 +9,6 @@ const page = async ({ params }: RouteParams) => {
   const interview = await fetchInterviewById(id);
 
   if (!interview) {
-    console.log(interview);
     redirect("/");
   }
   return (
@@ -30,6 +29,7 @@ const page = async ({ params }: RouteParams) => {
         type="interview"
         interviewId={id}
         questions={interview?.questions}
+        interviewName={interview?.role.toString()}
       />
     </>
   );

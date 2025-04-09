@@ -29,10 +29,12 @@ function InterviewCard({
   type,
   interviewId,
   questions,
+  interviewName,
 }: {
   type: string;
   interviewId?: string;
   questions?: string[];
+  interviewName?: string;
 }) {
   const router = useRouter();
   const [callStatus, setCallStatus] = useState<CallStatus>(CallStatus.INACTIVE);
@@ -88,6 +90,7 @@ function InterviewCard({
     const { success, feedbackId: id } = await createFeedback({
       interviewId: interviewId!,
       transcript: messages,
+      interviewName: interviewName,
     });
     if (success && id) {
       router.push(`/interview/${interviewId}/feedback`);

@@ -7,12 +7,13 @@ import { feedbackSchema } from "@/constants";
 import Feedback from "@/models/Feedback.schema";
 import Course from "@/models/Course.schema";
 import { auth } from "@clerk/nextjs/server";
+import { toast } from "sonner";
 
 export async function createFeedback(params: FeedbackParams) {
   await connectDB();
-  const { interviewId, transcript } = params;
+  const { interviewId, transcript, interviewName } = params;
   const { userId } = await auth();
-  console.log(userId);
+  console.log(interviewName);
   try {
     const formattedTranscript = transcript
       .map(
@@ -43,6 +44,7 @@ export async function createFeedback(params: FeedbackParams) {
     console.log(object);
     const newFeedback = new Feedback({
       interviewId,
+      interviewName,
       userid: userId,
       totalScore: object.totalScore,
       categoryScores: object.categoryScores,
@@ -57,6 +59,7 @@ export async function createFeedback(params: FeedbackParams) {
     };
   } catch (error) {
     console.error("Error saving feedback :", error);
+    toast("Error generating feedback");
     return {
       success: false,
     };

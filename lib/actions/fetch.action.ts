@@ -2,6 +2,8 @@
 import Course from "@/models/Course.schema";
 import connectDB from "../connectDB";
 import Feedback from "@/models/Feedback.schema";
+import { toast } from "sonner";
+import { auth } from "@clerk/nextjs/server";
 
 export async function fetchInterviews(userId: string) {
   await connectDB();
@@ -12,8 +14,8 @@ export async function fetchInterviews(userId: string) {
     console.log("Error :", error);
   }
 }
-
-export async function fetchFeedbackById(
+//this is for after interview
+export async function fetchFeedbackByInterviewId(
   params: GetFeedbackByInterviewIdParams
 ): Promise<Feedback | null> {
   await connectDB();
@@ -35,5 +37,28 @@ export async function fetchFeedbackById(
   } catch (error) {
     console.log("Error :", error);
     return null;
+  }
+}
+
+export async function fetchFeedbacks() {
+  await connectDB();
+  const { userId } = await auth();
+  try {
+    const fetchedFeedbacks = await Feedback.find({ userid: userId }).lean();
+    return JSON.parse(JSON.stringify(fetchedFeedbacks));
+  } catch (error) {
+    console.log("Error :", error);
+  }
+}
+//this is for feedbacks page
+export async function fetchFeedbackById(id: string): Promise<Feedback | null> {
+  await connectDB();
+  try {
+    const feedback = await Feedback.findById(id).limit(1);
+    return JSON.parse(JSON.stringify(feedback));
+  } catch (error) {
+    console.log("Error :", error);
+    return null;
+    toast("Error fetching feedback");
   }
 }

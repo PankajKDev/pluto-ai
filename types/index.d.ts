@@ -31,11 +31,12 @@ interface PricingCardProps {
 
 interface RouteParams {
   params: Promise<Record<string, string>>;
-  searchParans: Promise<Record<string, string>>;
+  searchParams: Promise<Record<string, string>>;
 }
 
 interface FeedbackParams {
   interviewId: string;
+  interviewName: string;
   transcript: { role: string; content: string };
   feedbackId?: string;
 }
@@ -43,6 +44,8 @@ interface FeedbackParams {
 interface Feedback {
   _id: string;
   totalScore: number;
+  interviewId?: string;
+  interviewName?: string;
   categoryScores: Array<{
     name: string;
     score: number;

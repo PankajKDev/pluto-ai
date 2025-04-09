@@ -19,7 +19,7 @@ export interface CourseType {
   amount: number;
   techstack: string[];
   questions: string[];
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date;
+  updatedAt: Date;
   __v: number;
 }

@@ -1,8 +1,6 @@
 import { Button } from "@/components/ui/button";
 import PageHeading from "@/components/ui/PageHeading";
-import { fetchFeedbackByInterviewId } from "@/lib/actions/fetch.action";
-import { fetchInterviewById } from "@/lib/actions/general.action";
-import { auth } from "@clerk/nextjs/server";
+import { fetchFeedbackById } from "@/lib/actions/fetch.action";
 import dayjs from "dayjs";
 import {
   BicepsFlexed,
@@ -13,16 +11,15 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { toast } from "sonner";
+
 const page = async ({ params }: RouteParams) => {
   const { id } = await params;
-  const { userId } = await auth();
-  const interview = await fetchInterviewById(id);
-  if (!interview) redirect("/");
-  const feedback = await fetchFeedbackByInterviewId({
-    interviewId: id,
-    userId: userId,
-  });
-  console.log(id);
+  const feedback = await fetchFeedbackById(id);
+  if (!feedback) {
+    toast("Error viewing interview");
+    redirect("/");
+  }
   const formatteddate = dayjs(feedback?.createdAt).format("DD MMMM YYYY HH:mm");
 
   return (

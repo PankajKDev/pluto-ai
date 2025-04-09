@@ -15,8 +15,8 @@ export const navLinks = [
     name: "Interview",
   },
   {
-    path: "/pricing",
-    name: "Pricing",
+    path: "/feedbacks",
+    name: "Feedbacks",
   },
 ];
 
