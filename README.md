@@ -50,17 +50,22 @@ Pluto AI is an advanced interview application that leverages AI to conduct mock 
    ```
 
 3. Create a `.env.local` file in the root directory and add the following environment variables:
-   `env
- NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
-CLERK_SECRET_KEY=
-#VAPI KEY
-NEXT_PUBLIC_VAPI_PUBLIC_KEY=
-NEXT_PUBLIC_VAPI_ASSISTANT_ID=
-#GEMINI
-GOOGLE_GENERATIVE_AI_API_KEY=
-#MONGODB
-DATABASE_URL=
-    `
+
+   ```env
+   # Clerk
+   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_key
+   CLERK_SECRET_KEY=your_clerk_secret_key
+
+   # VAPI
+   NEXT_PUBLIC_VAPI_PUBLIC_KEY=your_vapi_public_key
+   NEXT_PUBLIC_VAPI_ASSISTANT_ID=your_vapi_assistant_id
+
+   # Gemini
+   GOOGLE_GENERATIVE_AI_API_KEY=your_google_generative_ai_api_key
+
+   # MongoDB
+   DATABASE_URL=your_database_url
+   ```
 
 4. Run the development server:
 
@@ -71,3 +76,7 @@ DATABASE_URL=
 5. Open [http://localhost:3000](http://localhost:3000) in your browser to see the app.
 
 ---
+
+## Contact
+
+For questions or feedback, reach out at [pankajkdev.0000@gmail.com](mailto:pankajkdev.0000@gmail.com).
