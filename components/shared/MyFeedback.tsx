@@ -42,7 +42,7 @@ function MyFeedback() {
   }
 
   return (
-    <main className="grid w-full lg:w-[80%] gap-4 min-h-full py-5  grid-cols-1  place-items-center place-content-center sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
+    <>
       {data.length < 1 ? (
         <div className="w-full h-full flex justify-center items-center flex-col gap-10">
           <h1 className="text-foreground text-2xl text-center">
@@ -55,7 +55,7 @@ function MyFeedback() {
           </Link>
         </div>
       ) : (
-        <>
+        <main className="grid w-full lg:w-[80%] gap-4 min-h-full py-5  grid-cols-1  place-items-center place-content-center sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
           {data.map((item, index) => (
             <FeedbackCard
               key={index}
@@ -65,9 +65,9 @@ function MyFeedback() {
               summary={item.finalAssessment}
             />
           ))}
-        </>
+        </main>
       )}
-    </main>
+    </>
   );
 }
 

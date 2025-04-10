@@ -1,33 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Quote } from "lucide-react";
-
-const testimonials = [
-  {
-    name: "Sarah Chen",
-    role: "Software Engineer at Google",
-    image: "/avatars/sarah.jpg",
-    quote:
-      "Pluto AI's interview practice helped me land my dream job. The AI feedback was incredibly precise and helped me improve significantly.",
-    initials: "SC",
-  },
-  {
-    name: "Michael Rodriguez",
-    role: "Full Stack Developer",
-    image: "/avatars/micahel.jpg",
-    quote:
-      "The personalized learning paths are amazing. It's like having a mentor who knows exactly what you need to learn next.",
-    initials: "MR",
-  },
-  {
-    name: "Emily Thompson",
-    role: "Data Scientist",
-    image: "/avatars/emily.jpg",
-    quote:
-      "The quality of courses and AI-driven feedback have accelerated my learning journey. Highly recommend for anyone in tech.",
-    initials: "ET",
-  },
-];
+import { testimonials } from "@/constants";
 
 const Testimonials = () => {
   return (
