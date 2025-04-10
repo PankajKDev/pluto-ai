@@ -60,5 +60,10 @@ interface Feedback {
 
 interface GetFeedbackByInterviewIdParams {
   interviewId: string;
-  userId: string;
+  userId: string | undefined;
+}
+
+interface ILoading {
+  isLoading: boolean;
+  progress: number;
 }

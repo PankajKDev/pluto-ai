@@ -76,7 +76,7 @@ const Footer = () => {
             <p className="text-sm text-muted-foreground">
               © {new Date().getFullYear()} Pluto AI. All rights reserved.
             </p>
-            <div className="flex items-center space-x-4 text-sm text-muted-foreground">
+            {/* <div className="flex items-center space-x-4 text-sm text-muted-foreground">
               <Link
                 href="/privacy"
                 className="hover:text-foreground transition"
@@ -92,7 +92,7 @@ const Footer = () => {
               >
                 Contact
               </Link>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
